@@ -1,0 +1,763 @@
+
+<html>
+<head>
+<title>GreenHouse Emission Calculator</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style type="text/css">
+@font-face {
+    font-family: 'Bebas Neue';
+    src: url('BebasNeue-webfont.eot');
+    src: url('BebasNeue-webfont.eot?#iefix') format('embedded-opentype'),
+         url('BebasNeue-webfont.woff') format('woff'),
+         url('BebasNeue-webfont.ttf') format('truetype'),
+         url('BebasNeue-webfont.svg#BebasNeueRegular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+html,body
+{
+  margin:0px;
+  background: url('back.png') repeat;
+  font-family: Tahoma;
+}
+h1
+{
+  font-family: Myriad Pro, Segoe UI, Tahoma;
+  font-size:60px;
+  color:#2c3824;
+}
+h2
+{
+  font-family: Myriad Pro, Segoe UI, Tahoma;
+  font-size:40px;
+  color:#2a9242;
+  margin-top: 10px;
+}
+a
+{
+  text-decoration:none;
+  background:#01915B;
+  padding:10px;
+  margin-left:10px;
+  color:#000;
+  font-family: Bebas Neue;
+  font-size: 30px;
+  color:#eee;
+    -webkit-transition:all .2s;
+
+}
+img
+{
+  margin-top:10px;
+}
+form
+{
+  text-align: left;
+  width:500px;
+  margin-left:400px;
+  color:#0c3515;
+  font-size: 18px;
+}
+input
+{
+
+}
+span
+{
+  text-align:right;
+  float:right;
+}
+span.unit
+{
+  float:none;
+  position: absolute;
+  left:900px;
+}
+input[type=button]
+{
+  padding:10px;
+  background:#01915B;
+  border:0px;
+  font-family: Bebas Neue;
+  font-size:20px;
+    -webkit-transition:all .2s;
+
+}
+input[type=button]:hover
+{
+  padding:10px;
+  background:#000;
+  color:#eee;
+  border:0px;
+  font-family: Bebas Neue;
+  font-size:20px;
+  cursor:pointer;
+
+}
+input[type=submit]
+{
+  padding:10px;
+  background:#01915B;
+  border:0px;
+  font-family: Bebas Neue;
+  font-size:20px;
+  margin-left:10px;
+    -webkit-transition:all .2s;
+
+}
+input[type=submit]:hover
+{
+  padding:10px;
+  background:#000;
+  color:#eee;
+  border:0px;
+  font-family: Bebas Neue;
+  font-size:20px;
+  margin-left:10px;
+  cursor:pointer;
+}
+footer
+{
+  position:relative;
+  bottom: 0px;
+  background:#000;
+  color:#eee;
+  height:120px;
+  width:100%;
+  text-align: center;
+}
+footer a
+{
+  padding:3px;
+  margin-right: 2px;
+  margin-left:0px;
+  background:#01915B;
+  color:#eee;
+}
+footer a:hover
+{
+  padding:3px;
+  margin-right: 2px;
+  margin-left:0px;
+  background:#01915B;
+  color:#000;
+}
+.home_links a
+{
+  background: #000;
+  color:#eee;
+  padding:5px;
+  margin-right: 10px;
+}
+.home_links a:hover
+{
+  padding:5px;
+  margin-right: 10px;
+}
+</style>
+<script type="text/javascript" src="jquery.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	$("table").hide();
+	function displayVals() {
+      var t_electricity = $('[name="f_electricity"]').val();
+      var co_electricity = Math.round((t_electricity*0)*1000)/1000;
+      var ch_electricity = Math.round((t_electricity*0)*1000)/1000;
+      var no_electricity = Math.round((t_electricity*0)*1000)/1000;
+      var ghg_electricity = Math.round((t_electricity*1.2705)*1000)/1000;
+      $('td[name="t_electricity"]').html(t_electricity);
+      $('td[name="co_electricity"]').html("");
+      $('td[name="ch_electricity"]').html("");
+      $('td[name="no_electricity"]').html("");
+      $('td[name="ghg_electricity"]').html(ghg_electricity);
+
+      var t_diesel = $('[name="f_diesel"]').val();
+      var co_diesel = Math.round((t_diesel*2.6391)*1000)/1000;
+      var ch_diesel = Math.round((t_diesel*0.0019)*1000)/1000;
+      var no_diesel = Math.round((t_diesel*0.0283)*1000)/1000;
+      var ghg_diesel = Math.round((t_diesel*2.6694)*1000)/1000;
+      $('td[name="t_diesel"]').html(t_diesel);
+      $('td[name="co_diesel"]').html(co_diesel);
+      $('td[name="ch_diesel"]').html(ch_diesel);
+      $('td[name="no_diesel"]').html(no_diesel);
+      $('td[name="ghg_diesel"]').html(ghg_diesel);
+
+      
+      var t_transportbyd = $('[name="f_transportbyd"]').val();
+      var co_transportbyd = Math.round((t_transportbyd*0.151)*1000)/1000;
+      var ch_transportbyd = Math.round((t_transportbyd*0.0001)*1000)/1000;
+      var no_transportbyd = Math.round((t_transportbyd*0.0017)*1000)/1000;
+      var ghg_transportbyd = Math.round((t_transportbyd*0.1528)*1000)/1000;
+      $('td[name="t_transportbyd"]').html(t_transportbyd);
+      $('td[name="co_transportbyd"]').html(co_transportbyd);
+      $('td[name="ch_transportbyd"]').html(ch_transportbyd);
+      $('td[name="no_transportbyd"]').html(no_transportbyd);
+      $('td[name="ghg_transportbyd"]').html(ghg_transportbyd);
+
+      
+      var t_transportbyp = $('[name="f_transportbyp"]').val();
+      var co_transportbyp = Math.round((t_transportbyp*0.1798)*1000)/1000;
+      var ch_transportbyp = Math.round((t_transportbyp*0.0003)*1000)/1000;
+      var no_transportbyp = Math.round((t_transportbyp*0.0018)*1000)/1000;
+      var ghg_transportbyp = Math.round((t_transportbyp*0.1819)*1000)/1000;
+      $('td[name="t_transportbyp"]').html(t_transportbyp);
+      $('td[name="co_transportbyp"]').html(co_transportbyp);
+      $('td[name="ch_transportbyp"]').html(ch_transportbyp);
+      $('td[name="no_transportbyp"]').html(no_transportbyp);
+      $('td[name="ghg_transportbyp"]').html(ghg_transportbyp);
+
+      
+      var t_transportbyc = $('[name="f_transportbyc"]').val();
+      var co_transportbyc = Math.round((t_transportbyc*0.8065)*1000)/1000;
+      var ch_transportbyc = Math.round((t_transportbyc*0.0038)*1000)/1000;
+      var no_transportbyc = Math.round((t_transportbyc*0.0062)*1000)/1000;
+      var ghg_transportbyc = Math.round((t_transportbyc*0.8165)*1000)/1000;
+      $('td[name="t_transportbyc"]').html(t_transportbyc);
+      $('td[name="co_transportbyc"]').html(co_transportbyc);
+      $('td[name="ch_transportbyc"]').html(ch_transportbyc);
+      $('td[name="no_transportbyc"]').html(no_transportbyc);
+      $('td[name="ghg_transportbyc"]').html(ghg_transportbyc);
+
+      
+      var t_travellocal = $('[name="f_travellocal"]').val();
+      var co_travellocal = Math.round((t_travellocal*0.151)*1000)/1000;
+      var ch_travellocal = Math.round((t_travellocal*0.0001)*1000)/1000;
+      var no_travellocal = Math.round((t_travellocal*0.0017)*1000)/1000;
+      var ghg_travellocal = Math.round((t_travellocal*0.1528)*1000)/1000;
+      $('td[name="t_travellocal"]').html(t_travellocal);
+      $('td[name="co_travellocal"]').html(co_travellocal);
+      $('td[name="ch_travellocal"]').html(ch_travellocal);
+      $('td[name="no_travellocal"]').html(no_travellocal);
+      $('td[name="ghg_travellocal"]').html(ghg_travellocal);
+
+      var t_traveldomestic = $('[name="f_traveldomestic"]').val();
+      var co_traveldomestic = Math.round((t_traveldomestic*0)*1000)/1000;
+      var ch_traveldomestic = Math.round((t_traveldomestic*0)*1000)/1000;
+      var no_traveldomestic = Math.round((t_traveldomestic*0)*1000)/1000;
+      var ghg_traveldomestic = Math.round((t_traveldomestic*0.24)*1000)/1000;
+      $('td[name="t_traveldomestic"]').html(t_traveldomestic);
+      $('td[name="co_traveldomestic"]').html("");
+      $('td[name="ch_traveldomestic"]').html("");
+      $('td[name="no_traveldomestic"]').html("");
+      $('td[name="ghg_traveldomestic"]').html(ghg_traveldomestic);
+
+      var t_travelintl = $('[name="f_travelintl"]').val();
+      var co_travelintl = Math.round((t_travelintl*0)*1000)/1000;
+      var ch_travelintl = Math.round((t_travelintl*0)*1000)/1000;
+      var no_travelintl = Math.round((t_travelintl*0)*1000)/1000;
+      var ghg_travelintl = Math.round((t_travelintl*0.18)*1000)/1000;
+      $('td[name="t_travelintl"]').html(t_travelintl);
+      $('td[name="co_travelintl"]').html("");
+      $('td[name="ch_travelintl"]').html("");
+      $('td[name="no_travelintl"]').html("");
+      $('td[name="ghg_travelintl"]').html(ghg_travelintl);
+
+      var t_hotel = $('[name="f_hotel"]').val();
+      var co_hotel = Math.round((t_hotel*0)*1000)/1000;
+      var ch_hotel = Math.round((t_hotel*0)*1000)/1000;
+      var no_hotel = Math.round((t_hotel*0)*1000)/1000;
+      var ghg_hotel = Math.round((t_hotel*29.53)*1000)/1000;
+      $('td[name="t_hotel"]').html(t_hotel);
+      $('td[name="co_hotel"]').html("");
+      $('td[name="ch_hotel"]').html("");
+      $('td[name="no_hotel"]').html("");
+      $('td[name="ghg_hotel"]').html(ghg_hotel);
+
+      var t_cafeelec = $('[name="f_cafeelec"]').val();
+      var co_cafeelec = Math.round((t_cafeelec*0)*1000)/1000;
+      var ch_cafeelec = Math.round((t_cafeelec*0)*1000)/1000;
+      var no_cafeelec = Math.round((t_cafeelec*0)*1000)/1000;
+      var ghg_cafeelec = Math.round((t_cafeelec*1.2705)*1000)/1000;
+      $('td[name="t_cafeelec"]').html(t_cafeelec);
+      $('td[name="co_cafeelec"]').html("");
+      $('td[name="ch_cafeelec"]').html("");
+      $('td[name="no_cafeelec"]').html("");
+      $('td[name="ghg_cafeelec"]').html(ghg_cafeelec);
+
+      
+      var t_cafelpg = $('[name="f_cafelpg"]').val();
+      var co_cafelpg = Math.round((t_cafelpg*1.4951)*1000)/1000;
+      var ch_cafelpg = Math.round((t_cafelpg*0.0006)*1000)/1000;
+      var no_cafelpg = Math.round((t_cafelpg*0.0011)*1000)/1000;
+      var ghg_cafelpg = Math.round((t_cafelpg*1.4968)*1000)/1000;
+      $('td[name="t_cafelpg"]').html(t_cafelpg);
+      $('td[name="co_cafelpg"]').html(co_cafelpg);
+      $('td[name="ch_cafelpg"]').html(ch_cafelpg);
+      $('td[name="no_cafelpg"]').html(no_cafelpg);
+      $('td[name="ghg_cafelpg"]').html(ghg_cafelpg);
+
+      
+      var t_cafediststaff = $('[name="f_cafediststaff"]').val();
+      var co_cafediststaff = Math.round((t_cafediststaff*0.8065)*1000)/1000;
+      var ch_cafediststaff = Math.round((t_cafediststaff*0.0038)*1000)/1000;
+      var no_cafediststaff = Math.round((t_cafediststaff*0.0062)*1000)/1000;
+      var ghg_cafediststaff = Math.round((t_cafediststaff*0.8165)*1000)/1000;
+      $('td[name="t_cafediststaff"]').html(t_cafediststaff);
+      $('td[name="co_cafediststaff"]').html(co_cafediststaff);
+      $('td[name="ch_cafediststaff"]').html(ch_cafediststaff);
+      $('td[name="no_cafediststaff"]').html(no_cafediststaff);
+      $('td[name="ghg_cafediststaff"]').html(ghg_cafediststaff);
+
+      
+      var t_cafedistserv = $('[name="f_cafedistserv"]').val();
+      var co_cafedistserv = Math.round((t_cafedistserv*0.2718)*1000)/1000;
+      var ch_cafedistserv = Math.round((t_cafedistserv*0.0003)*1000)/1000;
+      var no_cafedistserv = Math.round((t_cafedistserv*0.0035)*1000)/1000;
+      var ghg_cafedistserv = Math.round((t_cafedistserv*0.2756)*1000)/1000;
+      $('td[name="t_cafedistserv"]').html(t_cafedistserv);
+      $('td[name="co_cafedistserv"]').html(co_cafedistserv);
+      $('td[name="ch_cafedistserv"]').html(ch_cafedistserv);
+      $('td[name="no_cafedistserv"]').html(no_cafedistserv);
+      $('td[name="ghg_cafedistserv"]').html(ghg_cafedistserv);
+
+      var t_paperstrec = $('[name="f_paperstrec"]').val();
+      var co_paperstrec = Math.round((t_paperstrec*0)*1000)/1000;
+      var ch_paperstrec = Math.round((t_paperstrec*0)*1000)/1000;
+      var no_paperstrec = Math.round((t_paperstrec*0)*1000)/1000;
+      var ghg_paperstrec = Math.round((t_paperstrec*1.76)*1000)/1000;
+      $('td[name="t_paperstrec"]').html(t_paperstrec);
+      $('td[name="co_paperstrec"]').html("");
+      $('td[name="ch_paperstrec"]').html("");
+      $('td[name="no_paperstrec"]').html("");
+      $('td[name="ghg_paperstrec"]').html(ghg_paperstrec);
+
+      var t_paperstvirgin = $('[name="f_paperstvirgin"]').val();
+      var co_paperstvirgin = Math.round((t_paperstvirgin*0)*1000)/1000;
+      var ch_paperstvirgin = Math.round((t_paperstvirgin*0)*1000)/1000;
+      var no_paperstvirgin = Math.round((t_paperstvirgin*0)*1000)/1000;
+      var ghg_paperstvirgin = Math.round((t_paperstvirgin*2.29)*1000)/1000;
+      $('td[name="t_paperstvirgin"]').html(t_paperstvirgin);
+      $('td[name="co_paperstvirgin"]').html("");
+      $('td[name="ch_paperstvirgin"]').html("");
+      $('td[name="no_paperstvirgin"]').html("");
+      $('td[name="ghg_paperstvirgin"]').html(ghg_paperstvirgin);
+
+      var t_paperbeakrec = $('[name="f_paperbeakrec"]').val();
+      var co_paperbeakrec = Math.round((t_paperbeakrec*0)*1000)/1000;
+      var ch_paperbeakrec = Math.round((t_paperbeakrec*0)*1000)/1000;
+      var no_paperbeakrec = Math.round((t_paperbeakrec*0)*1000)/1000;
+      var ghg_paperbeakrec = Math.round((t_paperbeakrec*1.76)*1000)/1000;
+      $('td[name="t_paperbeakrec"]').html(t_paperbeakrec);
+      $('td[name="co_paperbeakrec"]').html("");
+      $('td[name="ch_paperbeakrec"]').html("");
+      $('td[name="no_paperbeakrec"]').html("");
+      $('td[name="ghg_paperbeakrec"]').html(ghg_paperbeakrec);
+
+      var t_paperbeakvirgin = $('[name="f_paperbeakvirgin"]').val();
+      var co_paperbeakvirgin = Math.round((t_paperbeakvirgin*0)*1000)/1000;
+      var ch_paperbeakvirgin = Math.round((t_paperbeakvirgin*0)*1000)/1000;
+      var no_paperbeakvirgin = Math.round((t_paperbeakvirgin*0)*1000)/1000;
+      var ghg_paperbeakvirgin = Math.round((t_paperbeakvirgin*2.29)*1000)/1000;
+      $('td[name="t_paperbeakvirgin"]').html(t_paperbeakvirgin);
+      $('td[name="co_paperbeakvirgin"]').html("");
+      $('td[name="ch_paperbeakvirgin"]').html("");
+      $('td[name="no_paperbeakvirgin"]').html("");
+      $('td[name="ghg_paperbeakvirgin"]').html(ghg_paperbeakvirgin);
+
+      var t_toilet = $('[name="f_toilet"]').val();
+      var co_toilet = Math.round((t_toilet*0)*1000)/1000;
+      var ch_toilet = Math.round((t_toilet*0)*1000)/1000;
+      var no_toilet = Math.round((t_toilet*0)*1000)/1000;
+      var ghg_toilet = Math.round((t_toilet*3.24)*1000)/1000;
+      $('td[name="t_toilet"]').html(t_toilet);
+      $('td[name="co_toilet"]').html("");
+      $('td[name="ch_toilet"]').html("");
+      $('td[name="no_toilet"]').html("");
+      $('td[name="ghg_toilet"]').html(ghg_toilet);
+
+      var t_wastefood = $('[name="f_wastefood"]').val();
+      var co_wastefood = Math.round((t_wastefood*0)*1000)/1000;
+      var ch_wastefood = Math.round((t_wastefood*0)*1000)/1000;
+      var no_wastefood = Math.round((t_wastefood*0)*1000)/1000;
+      var ghg_wastefood = Math.round((t_wastefood*2.29)*1000)/1000;
+      $('td[name="t_wastefood"]').html(t_wastefood);
+      $('td[name="co_wastefood"]').html("");
+      $('td[name="ch_wastefood"]').html("");
+      $('td[name="no_wastefood"]').html("");
+      $('td[name="ghg_wastefood"]').html(ghg_wastefood);
+
+      var t_wastepaper = $('[name="f_wastepaper"]').val();
+      var co_wastepaper = Math.round((t_wastepaper*0)*1000)/1000;
+      var ch_wastepaper = Math.round((t_wastepaper*0)*1000)/1000;
+      var no_wastepaper = Math.round((t_wastepaper*0)*1000)/1000;
+      var ghg_wastepaper = Math.round((t_wastepaper*3.42)*1000)/1000;
+      $('td[name="t_wastepaper"]').html(t_wastepaper);
+      $('td[name="co_wastepaper"]').html("");
+      $('td[name="ch_wastepaper"]').html("");
+      $('td[name="no_wastepaper"]').html("");
+      $('td[name="ghg_wastepaper"]').html(ghg_wastepaper);
+
+      var t_wastee = $('[name="f_wastee"]').val();
+      var co_wastee = Math.round((t_wastee*0)*1000)/1000;
+      var ch_wastee = Math.round((t_wastee*0)*1000)/1000;
+      var no_wastee = Math.round((t_wastee*0)*1000)/1000;
+      var ghg_wastee = Math.round((t_wastee*5.22)*1000)/1000;
+      $('td[name="t_wastee"]').html(t_wastee);
+      $('td[name="co_wastee"]').html("");
+      $('td[name="ch_wastee"]').html("");
+      $('td[name="no_wastee"]').html("");
+      $('td[name="ghg_wastee"]').html(ghg_wastee);
+
+      var t_wastecarton = $('[name="f_wastecarton"]').val();
+      var co_wastecarton = Math.round((t_wastecarton*0)*1000)/1000;
+      var ch_wastecarton = Math.round((t_wastecarton*0)*1000)/1000;
+      var no_wastecarton = Math.round((t_wastecarton*0)*1000)/1000;
+      var ghg_wastecarton = Math.round((t_wastecarton*3.11)*1000)/1000;
+      $('td[name="t_wastecarton"]').html(t_wastecarton);
+      $('td[name="co_wastecarton"]').html("");
+      $('td[name="ch_wastecarton"]').html("");
+      $('td[name="no_wastecarton"]').html("");
+      $('td[name="ghg_wastecarton"]').html(ghg_wastecarton);
+
+      var t_wastesolid = $('[name="f_wastesolid"]').val();
+      var co_wastesolid = Math.round((t_wastesolid*0)*1000)/1000;
+      var ch_wastesolid = Math.round((t_wastesolid*0)*1000)/1000;
+      var no_wastesolid = Math.round((t_wastesolid*0)*1000)/1000;
+      var ghg_wastesolid = Math.round((t_wastesolid*0.329)*1000)/1000;
+      $('td[name="t_wastesolid"]').html(t_wastesolid);
+      $('td[name="co_wastesolid"]').html("");
+      $('td[name="ch_wastesolid"]').html("");
+      $('td[name="no_wastesolid"]').html("");
+      $('td[name="ghg_wastesolid"]').html(ghg_wastesolid);
+
+      $(".calculate_button").click(function(){
+        $("table").show("slow");
+      });
+    }
+ 
+    $("form").change(displayVals);
+    displayVals();
+
+});
+</script>
+
+<style type="text/css">
+table
+{
+  width:80%;
+  margin: auto;
+  border:5px solid #2a9242;
+  background: #31bc51;
+}
+th
+{
+  background:#2a9242;
+  padding:10px;
+}
+td{
+  width:10%;
+  text-align: center;
+  padding:5px;
+  border:1px solid #2a9242;
+  
+}
+</style>
+</head>
+</html
+<body>
+  <center><h2>
+    Greenhouse Gas Emission Calculator
+  </h2></center>
+<form method="post" action="action.php" name="form">
+  Name <span><input type="text" name="fname"></span> <br><br>
+  Organisation <span><input type="text" name="forgan"></span> <br><br><br>
+
+	Electricity <span><input type="text" name="f_electricity"></span><span class="unit"> kwh</span> <br><br>
+  
+  Diesel <span><input type="text" name="f_diesel"> </span><span class="unit">Litres </span><br><br>
+  
+  <font color="#2a9242">Transport</font><br>
+  by diesel vehicles <span><input type="text" name="f_transportbyd"></span><span class="unit"> km </span><br><br>
+  by petrol vehicles <span><input type="text" name="f_transportbyp"></span><span class="unit"> km </span><br><br>
+  by CNG vehicles <span><input type="text" name="f_transportbyc"></span><span class="unit"> km </span><br><br>
+  
+  Local Travel (Official) <span><input type="text" name="f_travellocal"></span><span class="unit"> km </span><br><br>
+  
+  Domestic Travel (Official) <span><input type="text" name="f_traveldomestic"></span><span class="unit"> air miles </span><br><br>
+  
+  International Travel (Official) <span><input type="text" name="f_travelintl"> </span><span class="unit">air miles </span><br><br>
+  
+  No. of Hotel Nights <span><input type="text" name="f_hotel"> </span><span class="unit">nights </span></span><br><br>
+  
+  <font color="#2a9242">Cafeteria</font><br>
+  Cafeteria Electricity <span><input type="text" name="f_cafeelec"></span><span class="unit"> kwh </span><br><br>
+  Cafeteria LPG Consumption <span><input type="text" name="f_cafelpg"></span><span class="unit"> Litres </span><br><br>
+  Distance travelled by Cafeteria staff <span><input type="text" name="f_cafediststaff"></span><span class="unit"> km </span><br><br>
+  Distance travelled by Cafeteria services <span><input type="text" name="f_cafedistserv"></span><span class="unit"> km </span><br><br>
+  
+  <font color="#2a9242">Paper Consumption</font><br>
+  <font color="#88a029">Stationary Items</font><br> 
+  recycled <span><input type="text" name="f_paperstrec"></span><span class="unit"> kg </span><br><br>
+  fresh virgin paper <span><input type="text" name="f_paperstvirgin"></span><span class="unit"> kg </span><br><br>
+  <font color="#88a029">Beaker Cups</font><br> 
+  recycled <span><input type="text" name="f_paperbeakrec"></span><span class="unit"> kg </span><br><br>
+  fresh virgin paper <span><input type="text" name="f_paperbeakvirgin"></span><span class="unit"> kg </span><br><br>
+
+ Toileteries <span><input type="text" name="f_toilet"></span><span class="unit"> kg </span><br><br>
+
+ Wastes Generated
+ Food Waste <span><input type="text" name="f_wastefood"></span><span class="unit"> kg </span><br><br>
+ Paper Waste <span><input type="text" name="f_wastepaper"></span><span class="unit"> kg </span><br><br>
+ e-Waste <span><input type="text" name="f_wastee"></span><span class="unit"> kg </span><br><br>
+ Carton Waste <span><input type="text" name="f_wastecarton"></span><span class="unit"> kg </span><br><br>
+ Solid Waste <span><input type="text" name="f_wastesolid"></span><span class="unit"> kg </span><br><br>
+
+<input type="button" value="Calculate" class="calculate_button"><input type="submit" value="Submit"> 
+</form>
+
+<table name="table" class="calulated" cellspacing="0">
+<tr>
+  <th>Fuel Type</th>
+  <th>Amount Used</th>
+  <th>C0<sub>2</sub></th>
+  <th>CH<sub>4</sub></th>
+  <th>N<sub>2</sub>0</th>
+  <th>Total GHG Emissions</th>
+</tr>
+
+<tr>
+  <td>Electricity</td>
+  <td name="t_electricity"></td>
+  <td name="co_electricity"></td>
+  <td name="ch_electricity"></td>
+  <td name="no_electricity"></td>
+  <td name="ghg_electricity"></td>
+</tr>
+
+<tr>
+  <td>Diesel</td>
+  <td name="t_diesel"></td>
+  <td name="co_diesel"></td>
+  <td name="ch_diesel"></td>
+  <td name="no_diesel"></td>
+  <td name="ghg_diesel"></td>
+</tr>
+
+<tr>
+  <td>Transport</td>
+</tr>
+
+<tr>
+  <td>by diesel vehicles</td>
+  <td name="t_transportbyd"></td>
+  <td name="co_transportbyd"></td>
+  <td name="ch_transportbyd"></td>
+  <td name="no_transportbyd"></td>
+  <td name="ghg_transportbyd"></td>
+</tr>
+
+<tr>
+  <td>by petrol vehicles</td>
+  <td name="t_transportbyp"></td>
+  <td name="co_transportbyp"></td>
+  <td name="ch_transportbyp"></td>
+  <td name="no_transportbyp"></td>
+  <td name="ghg_transportbyp"></td>
+</tr>
+
+<tr>
+  <td>by CNG vehicles</td>
+  <td name="t_transportbyc"></td>
+  <td name="co_transportbyc"></td>
+  <td name="ch_transportbyc"></td>
+  <td name="no_transportbyc"></td>
+  <td name="ghg_transportbyc"></td>
+</tr>
+
+<tr>
+  <td>Travel Local (Official) </td>
+  <td name="t_travellocal"></td>
+  <td name="co_travellocal"></td>
+  <td name="ch_travellocal"></td>
+  <td name="no_travellocal"></td>
+  <td name="ghg_travellocal"></td>
+</tr>
+
+<tr>
+  <td>Travel Domestic (Official) </td>
+  <td name="t_traveldomestic"></td>
+  <td name="co_traveldomestic"></td>
+  <td name="ch_traveldomestic"></td>
+  <td name="no_traveldomestic"></td>
+  <td name="ghg_traveldomestic"></td>
+</tr>
+
+<tr>
+  <td>Travel International (Official) </td>
+  <td name="t_travelintl"></td>
+  <td name="co_travelintl"></td>
+  <td name="ch_travelintl"></td>
+  <td name="no_travelintl"></td>
+  <td name="ghg_travelintl"></td>
+</tr>
+
+<tr>
+  <td>Number of Hotel Nights </td>
+  <td name="t_hotel"></td>
+  <td name="co_hotel"></td>
+  <td name="ch_hotel"></td>
+  <td name="no_hotel"></td>
+  <td name="ghg_hotel"></td>
+</tr>
+
+<tr>
+  <td>Cafeteria</td>
+</tr>
+
+<tr>
+  <td>Cafeteria Electricity </td>
+  <td name="t_cafeelec"></td>
+  <td name="co_cafeelec"></td>
+  <td name="ch_cafeelec"></td>
+  <td name="no_cafeelec"></td>
+  <td name="ghg_cafeelec"></td>
+</tr>
+
+<tr>
+  <td>Cafeteria LPG Consumption </td>
+  <td name="t_cafelpg"></td>
+  <td name="co_cafelpg"></td>
+  <td name="ch_cafelpg"></td>
+  <td name="no_cafelpg"></td>
+  <td name="ghg_cafelpg"></td>
+</tr>
+
+<tr>
+  <td>Distance travelled by Cafeteria staff </td>
+  <td name="t_cafediststaff"></td>
+  <td name="co_cafediststaff"></td>
+  <td name="ch_cafediststaff"></td>
+  <td name="no_cafediststaff"></td>
+  <td name="ghg_cafediststaff"></td>
+</tr>
+
+<tr>
+  <td>Distance travelled by Cafeteria services </td>
+  <td name="t_cafedistserv"></td>
+  <td name="co_cafedistserv"></td>
+  <td name="ch_cafedistserv"></td>
+  <td name="no_cafedistserv"></td>
+  <td name="ghg_cafedistserv"></td>
+</tr>
+
+<tr>
+  <td>Paper Consumption</td>
+</tr>
+
+<tr>
+  <td>Stationary Items</td>
+</tr>
+
+<tr>
+  <td>Recycled Paper </td>
+  <td name="t_paperstrec"></td>
+  <td name="co_paperstrec"></td>
+  <td name="ch_paperstrec"></td>
+  <td name="no_paperstrec"></td>
+  <td name="ghg_paperstrec"></td>
+</tr>
+
+<tr>
+  <td>Fresh Virgin Paper </td>
+  <td name="t_paperstvirgin"></td>
+  <td name="co_paperstvirgin"></td>
+  <td name="ch_paperstvirgin"></td>
+  <td name="no_paperstvirgin"></td>
+  <td name="ghg_paperstvirgin"></td>
+</tr>
+
+<tr>
+  <td>Beaker Cups</td>
+</tr>
+
+<tr>
+  <td>Recycled Paper </td>
+  <td name="t_paperbeakrec"></td>
+  <td name="co_paperbeakrec"></td>
+  <td name="ch_paperbeakrec"></td>
+  <td name="no_paperbeakrec"></td>
+  <td name="ghg_paperbeakrec"></td>
+</tr>
+
+<tr>
+  <td>Fresh Virgin Paper </td>
+  <td name="t_paperbeakvirgin"></td>
+  <td name="co_paperbeakvirgin"></td>
+  <td name="ch_paperbeakvirgin"></td>
+  <td name="no_paperbeakvirgin"></td>
+  <td name="ghg_paperbeakvirgin"></td>
+</tr>
+
+<tr>
+  <td>Toileteries </td>
+  <td name="t_toilet"></td>
+  <td name="co_toilet"></td>
+  <td name="ch_toilet"></td>
+  <td name="no_toilet"></td>
+  <td name="ghg_toilet"></td>
+</tr>
+
+<tr>
+  <td>Wastes Generated</td>
+</tr>
+
+<tr>
+  <td>Waste Food </td>
+  <td name="t_wastefood"></td>
+  <td name="co_wastefood"></td>
+  <td name="ch_wastefood"></td>
+  <td name="no_wastefood"></td>
+  <td name="ghg_wastefood"></td>
+</tr>
+
+<tr>
+  <td>Waste Paper </td>
+  <td name="t_wastepaper"></td>
+  <td name="co_wastepaper"></td>
+  <td name="ch_wastepaper"></td>
+  <td name="no_wastepaper"></td>
+  <td name="ghg_wastepaper"></td>
+</tr>
+
+<tr>
+  <td>e-Waste </td>
+  <td name="t_wastee"></td>
+  <td name="co_wastee"></td>
+  <td name="ch_wastee"></td>
+  <td name="no_wastee"></td>
+  <td name="ghg_wastee"></td>
+</tr>
+
+<tr>
+  <td>Waste Cartons </td>
+  <td name="t_wastecarton"></td>
+  <td name="co_wastecarton"></td>
+  <td name="ch_wastecarton"></td>
+  <td name="no_wastecarton"></td>
+  <td name="ghg_wastecarton"></td>
+</tr>
+
+<tr>
+  <td>Solid Waste </td>
+  <td name="t_wastesolid"></td>
+  <td name="co_wastesolid"></td>
+  <td name="ch_wastesolid"></td>
+  <td name="no_wastesolid"></td>
+  <td name="ghg_wastesolid"></td>
+</tr>
+
+
+
+</table>
+<br><br><br><br>
+<footer><br>Made by <a href="http://creativiz.com/rishabh">Rishabh Aggarwal</a> and <a href="#">Ayush Chopra</a>, <a href="http://dpsrohini.com">DPS Rohini</a>
+<br>
+<br>
+<div class="home_links">
+<a href="index.html">Home</a><a href="about.html">About</a><a href="calculator.html">Calculator</a>
+</div>
+</footer>
+
+</body>
+</html>

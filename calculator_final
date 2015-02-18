@@ -1,0 +1,32 @@
+<html>
+<head>
+<title>GreenHouse Emission Calculator</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script type="text/javascript" src="jquery.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	
+	function displayVals() {
+      var no = $('[name="fno"]').val();
+      var twono = no*2;
+      $('[name="tno"]').html(twono);
+    }
+ 
+    $("form").change(displayVals);
+    displayVals();
+
+});
+</script>
+</head>
+</html
+<body>
+<form method="post" action="action.php" name="form">
+	<input type="text" name="fno">
+</form>
+
+<table name="table" class="calulated">
+	<td name="tno">hell</td>
+</table>
+
+</body>
+</html>
